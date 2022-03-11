@@ -55,9 +55,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const grid = document.querySelector('.grid')
   const resultDisplay = document.querySelector('#result')
+  const guessnumDisplay = document.querySelector('#guessnum')
+  const messageDisplay = document.querySelector('#message')
   let cardsChosen = []
   let cardsChosenId = []
   let cardsWon = []
+  let guessnum = 0
+  document.getElementById('playbutton').style.display = "none"
 
   //create your board
   function createBoard() {
@@ -75,14 +79,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('img')
     const optionOneId = cardsChosenId[0]
     const optionTwoId = cardsChosenId[1]
+    guessnum = guessnum + 1
+    guessnumDisplay.textContent = guessnum
+
     
     if(optionOneId == optionTwoId) {
       cards[optionOneId].setAttribute('src', 'images/blank.png')
       cards[optionTwoId].setAttribute('src', 'images/blank.png')
-      alert('You have clicked the same image!')
+      messageDisplay.textContent = 'You\'ve clicked the same image!'
     }
     else if (cardsChosen[0] === cardsChosen[1]) {
-      alert('You found a match')
+      messageDisplay.textContent = 'You found a match!'
       cards[optionOneId].setAttribute('src', 'images/white.png')
       cards[optionTwoId].setAttribute('src', 'images/white.png')
       cards[optionOneId].removeEventListener('click', flipCard)
@@ -91,13 +98,15 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       cards[optionOneId].setAttribute('src', 'images/blank.png')
       cards[optionTwoId].setAttribute('src', 'images/blank.png')
-      alert('Sorry, try again')
+      messageDisplay.textContent = 'Sorry, try again...'
     }
     cardsChosen = []
     cardsChosenId = []
     resultDisplay.textContent = cardsWon.length
     if  (cardsWon.length === cardArray.length/2) {
-      resultDisplay.textContent = 'Congratulations! You found them all!'
+      messageDisplay.textContent = 'Congratulations! You found them all!'
+        grid.remove()
+        document.getElementById('playbutton').style.display = "block"
     }
   }
 
