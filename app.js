@@ -102,9 +102,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     cardsChosen = []
     cardsChosenId = []
-    resultDisplay.textContent = cardsWon.length
+    resultDisplay.textContent = cardsWon.length + " / " + cardArray.length/2
     if  (cardsWon.length === cardArray.length/2) {
       messageDisplay.textContent = 'Congratulations! You found them all!'
+      messageDisplay.setAttribute('style', 'color:green')
+      guessnumDisplay.setAttribute('style', 'color:green')
+      resultDisplay.setAttribute('style', 'color:green')
         grid.remove()
         document.getElementById('playbutton').style.display = "block"
     }
